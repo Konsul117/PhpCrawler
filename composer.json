@@ -1,8 +1,8 @@
 {
-	"name": "brightlocal/php-crawler",
+	"name": konsul117/php-crawler",
 	"description": "php crawler library",
-	"homepage": "https://github.com/BrightLocal/PhpCrawler",
-	"version": "0.8.1",
+	"homepage": "https://github.com/Konsul117/PhpCrawler",
+	"version": "0.8.3RC1",
 	"autoload": {
 		"classmap": ["libs/"]
 	}
