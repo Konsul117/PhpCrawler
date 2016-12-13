@@ -544,7 +544,9 @@ class PHPCrawlerHTTPRequest
       // If ssl -> perform Server name indication
       if ($this->url_parts["protocol"] == "https://")
       {
-        $context = stream_context_create(array('ssl' => array('SNI_server_name' => $this->url_parts["host"])));
+        $context = stream_context_create(array('ssl' => array('verify_peer' => false,
+                                                               'verify_peer_name' => false,
+                                                               'allow_self_signed' => true)));
         $this->socket = @stream_socket_client($protocol_prefix.$ip_address.":".$this->url_parts["port"], $error_code, $error_str,
                                               $this->socketConnectTimeout, STREAM_CLIENT_CONNECT, $context);
       }
@@ -911,7 +913,8 @@ class PHPCrawlerHTTPRequest
     
     $headerlines[] = "Host: ".$this->url_parts["host"]."\r\n";
     
-    $headerlines[] = "User-Agent: ".str_replace("\n", "", $this->userAgentString)."\r\n";    $headerlines[] = "Accept: */*\r\n";
+    $headerlines[] = "User-Agent: ".str_replace("\n", "", $this->userAgentString)."\r\n";
+    $headerlines[] = "Accept: */*\r\n";
     
     // Request GZIP-content
     if ($this->request_gzip_content == true)
